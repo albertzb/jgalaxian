@@ -1,6 +1,6 @@
 # JGalaxian
 
-![JGalaxian Screenshot](jgalaxian.png)
+![JGalaxian Screenshot](jgalaxian.png =250px)
 
 JGalaxian is a Java-based Galaxian clone (you do remember Galaxian, right?). Although it's a pretty fun game in its own right, the code also serves as a decent tutorial on one way of building 2D games in general and in Java in particular. Some features of the design:
 
