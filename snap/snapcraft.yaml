@@ -1,0 +1,27 @@
+name: jgalaxian
+version: "0.0.1"
+summary: A Java Galaxian clone
+description: |
+  JGalaxian is a Java-based Galaxian clone.
+confinement: strict
+apps:
+  jgalaxian:
+    command: bin/run.sh
+    plugs: [alsa,pulseaudio]
+parts:
+  jgalaxian:
+    plugin: maven
+    source-type: local
+    source: .
+    override-build: |
+      export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+      mvn package
+      cp target/*.jar $SNAPCRAFT_PART_INSTALL/.
+    build-packages:
+      - openjdk-8-jdk
+  wrapper:
+    plugin: dump
+    source: .
+    organize:
+      run.sh: bin/run.sh
+
