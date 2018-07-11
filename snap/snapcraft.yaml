@@ -21,7 +21,7 @@ parts:
       - openjdk-8-jdk
   wrapper:
     plugin: dump
-    source: .
+    source: snap/.
     organize:
       run.sh: bin/run.sh
 

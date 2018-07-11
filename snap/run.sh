@@ -9,9 +9,6 @@ export XDG_DATA_HOME=$SNAP/usr/share
 export FONTCONFIG_PATH=$SNAP/etc/fonts/config.d
 export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
 
-#export PULSE_RUNTIME_PATH=/var/run/pulse
-#export PULSE_SYSTEM=1
-
 ARCH=x86_64-linux-gnu
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SNAP/usr/lib/$ARCH/pulseaudio
 
