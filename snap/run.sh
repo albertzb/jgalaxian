@@ -9,7 +9,7 @@ export XDG_DATA_HOME=$SNAP/usr/share
 export FONTCONFIG_PATH=$SNAP/etc/fonts/config.d
 export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
 
-ARCH=x86_64-linux-gnu
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SNAP/usr/lib/$ARCH/pulseaudio
+#ARCH=x86_64-linux-gnu
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SNAP/usr/lib/$ARCH/pulseaudio
 
 java -jar $SNAP/jgalaxian-1.0-SNAPSHOT.jar

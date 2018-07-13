@@ -7,7 +7,7 @@ confinement: strict
 apps:
   jgalaxian:
     command: bin/run.sh
-    plugs: [alsa,pulseaudio]
+    plugs: [x11,alsa,pulseaudio]
 parts:
   jgalaxian:
     plugin: maven
@@ -19,6 +19,8 @@ parts:
       cp target/*.jar $SNAPCRAFT_PART_INSTALL/.
     build-packages:
       - openjdk-8-jdk
+    organize:
+      'usr/lib/*/pulseaudio/*': '/lib'
   wrapper:
     plugin: dump
     source: snap/.

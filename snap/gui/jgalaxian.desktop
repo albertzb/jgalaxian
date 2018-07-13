@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=JGalaxian
+Exec=jgalaxian
+Type=Application
+Icon=${SNAP}/meta/gui/jgalaxian.png
