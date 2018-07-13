@@ -1,6 +1,5 @@
 
-snap/parts
-snap/prime
-snap/snap
-snap/stage
+parts
+prime
+stage
 snap/.snapcraft

@@ -12,4 +12,4 @@ export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
 #ARCH=x86_64-linux-gnu
 #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SNAP/usr/lib/$ARCH/pulseaudio
 
-java -jar $SNAP/jgalaxian-1.0-SNAPSHOT.jar
+java -jar $SNAP/jar/jgalaxian-1.0-SNAPSHOT.jar
