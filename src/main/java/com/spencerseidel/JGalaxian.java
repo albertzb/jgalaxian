@@ -36,8 +36,7 @@ public class JGalaxian extends Panel implements KeyListener {
 	private Image sfScore300[];
 	private Image extraLife;
 	private Image levelFlags[];
-	private Image gameOverSign;
-	private Image getReadySign;
+
 	// For stars
 	private Point[] stars;
 	// These lists manage our Sprites
@@ -68,7 +67,7 @@ public class JGalaxian extends Panel implements KeyListener {
 	private long gameCount;
 	private long gameResume;
 	// Set if anything is attacking
-	private boolean attacking;	
+	private boolean attacking;
 	// Number of lives left
 	private int numPlayerLives;
 	private int displayNumPlayerLives;
@@ -110,8 +109,8 @@ public class JGalaxian extends Panel implements KeyListener {
 
 		// First things first
 		glob = new JGGlob();
-	
-		gameState = JGGlob.JGSTATE_GAMEOVER;	
+
+		gameState = JGGlob.JGSTATE_GAMEOVER;
 
 		// Make sure we're listening to key events
 		addKeyListener(this);
@@ -136,7 +135,7 @@ public class JGalaxian extends Panel implements KeyListener {
 		dbContext.setFont(font);
 		fontMetrics = dbContext.getFontMetrics(font);
 		fontHeight = fontMetrics.getHeight();
-		
+
 		// These will be our explosions
 		createExImages();
 
@@ -145,7 +144,7 @@ public class JGalaxian extends Panel implements KeyListener {
 
 		stars = new Point[JGGlob.NUM_STARS];
 		for (int i=0; i<JGGlob.NUM_STARS; i++) {
-			stars[i] = new Point((int)(Math.random()*JGGlob.SCREEN_WIDTH), (int)(Math.random()*JGGlob.SCREEN_HEIGHT));	
+			stars[i] = new Point((int)(Math.random()*JGGlob.SCREEN_WIDTH), (int)(Math.random()*JGGlob.SCREEN_HEIGHT));
 		}
 	}
 
@@ -161,16 +160,16 @@ public class JGalaxian extends Panel implements KeyListener {
 
 		// Grab the time
 		start = System.currentTimeMillis();
-			
+
 		switch (gameState) {
 			case JGGlob.JGSTATE_PLAYING:
 				processGame();
 			break;
-			
+
 			case JGGlob.JGSTATE_PLAYERDIED:
 				processPlayerDied();
 			break;
-			
+
 			case JGGlob.JGSTATE_CHANGINGLEVEL1:
 			case JGGlob.JGSTATE_CHANGINGLEVEL2:
 				processChangingLevel();
@@ -180,7 +179,7 @@ public class JGalaxian extends Panel implements KeyListener {
 				updateBackground();
 				break;
 		}
-	
+
 		// Copy the double buffer to the screen
 		g.drawImage(db, 0, 0, this);
 
@@ -205,7 +204,7 @@ public class JGalaxian extends Panel implements KeyListener {
 	private void processGame() {
 		// Animate a frame
 		animate();
-	
+
 		if (score > highScore) {
 			highScore = score;
 		}
@@ -216,7 +215,7 @@ public class JGalaxian extends Panel implements KeyListener {
 			gameResume = gameCount + 200;
 			gameState = JGGlob.JGSTATE_PLAYERDIED;
 		}
-				
+
 		// Woohoo, new level
 		if (JGGlob.numBadGuys == 0 && gameResume < 0) {
 			gameState = JGGlob.JGSTATE_CHANGINGLEVEL1;
@@ -225,15 +224,15 @@ public class JGalaxian extends Panel implements KeyListener {
 			level++;
 			attackFrequency += JGGlob.LEVELINC_ATTACK_FREQUENCY;
 			enemyFireFrequency += JGGlob.LEVELINC_ENEMY_FIRE_FREQUENCY;
-		
+
 			// Make things a little more extreme every other level
 			if ((level-1)%2==0) {
 				if (++maxEnemyDescentSpeed > JGGlob.MAX_ENEMY_DESCENT_SPEED) {
-					maxEnemyDescentSpeed = JGGlob.MAX_ENEMY_DESCENT_SPEED;	
+					maxEnemyDescentSpeed = JGGlob.MAX_ENEMY_DESCENT_SPEED;
 				}
-	
+
 				if (++maxEnemyLateralSpeed > JGGlob.MAX_ENEMY_LATERAL_SPEED) {
-					maxEnemyLateralSpeed = JGGlob.MAX_ENEMY_LATERAL_SPEED;	
+					maxEnemyLateralSpeed = JGGlob.MAX_ENEMY_LATERAL_SPEED;
 				}
 
 				maxEnemiesAttacking++;
@@ -250,18 +249,18 @@ public class JGalaxian extends Panel implements KeyListener {
 	private void processPlayerDied() {
 		if (gameCount > gameResume && !attacking) {
 			displayNumPlayerLives--;
-		
+
 			// Add a player Sprite
 			sprites.get(currSpriteList).add(new JGPlayerSprite((JGGlob.SCREEN_WIDTH - JGGlob.PLAYER_WIDTH)/2, JGGlob.PLAYER_Y,
                                                             JGGlob.PLAYER_WIDTH, JGGlob.PLAYER_HEIGHT, sfPlayer));
-			// Add a missile	
+			// Add a missile
 			sprites.get(currSpriteList).add(new JGPMissileSprite((JGGlob.SCREEN_WIDTH - JGGlob.PMISSILE_WIDTH)/2 + JGGlob.PMISSILE_XOFFSET, JGGlob.PLAYER_Y,
                                                               JGGlob.PMISSILE_WIDTH, JGGlob.PMISSILE_HEIGHT, sfPMissile));
 
 			JGGlob.loadAnotherMissile = false;
 			gameResume = -1;
 			JGGlob.playerAlive = true;
-				
+
 			if (numPlayerLives < 0) {
 				gameState = JGGlob.JGSTATE_GAMEOVER;
 				wavGameOver.play();
@@ -281,7 +280,7 @@ public class JGalaxian extends Panel implements KeyListener {
 			case JGGlob.JGSTATE_CHANGINGLEVEL1:
 				if (gameCount > gameResume) {
 					gameState = JGGlob.JGSTATE_CHANGINGLEVEL2;
-					gameResume = gameCount + 150;	
+					gameResume = gameCount + 150;
 					wavGetReady.play();
 				}
 				else {
@@ -307,7 +306,7 @@ public class JGalaxian extends Panel implements KeyListener {
 	// Draw the background things like the level and the number
 	// of lives left
 	private void updateBackground() {
-		
+
 		// Clear the double buffer
 		wipeDoubleBuffer();
 
@@ -318,11 +317,11 @@ public class JGalaxian extends Panel implements KeyListener {
 
 			x = (int)stars[i].getX();
 			y = (int)stars[i].getY();
-			if (i%3==0) {	
+			if (i%3==0) {
 				y+=2;
 			}
 			else {
-				y++;	
+				y++;
 			}
 
 			if (y > JGGlob.SCREEN_HEIGHT) {
@@ -332,9 +331,9 @@ public class JGalaxian extends Panel implements KeyListener {
 			dbContext.setColor(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
 			dbContext.fillRect(x, y, (int)(2.0*JGGlob.SCALE), (int)(2.0*JGGlob.SCALE));
 		}
-	
+
 		// Extra lives
-		x=JGGlob.EXTRALIFE_STARTX; 	
+		x=JGGlob.EXTRALIFE_STARTX;
 		for (i=0; i<displayNumPlayerLives; i++) {
 			dbContext.drawImage(extraLife, x, JGGlob.SCREEN_HEIGHT - JGGlob.EXTRALIFE_HEIGHT, this);
 			x += JGGlob.EXTRALIFE_HORZ_SPACE;
@@ -348,14 +347,14 @@ public class JGalaxian extends Panel implements KeyListener {
 			dbContext.drawImage(levelFlags[JGGlob.LEVELFLAG_WORTH5], x, JGGlob.SCREEN_HEIGHT - JGGlob.LEVELFLAG_HEIGHT, this);
 			x -= JGGlob.LEVELFLAG_HORZ_SPACE;
 		}
-		
+
 		for (i=0; i<rem; i++) {
 			dbContext.drawImage(levelFlags[JGGlob.LEVELFLAG_NORMAL], x, JGGlob.SCREEN_HEIGHT - JGGlob.LEVELFLAG_HEIGHT, this);
 			x -= JGGlob.LEVELFLAG_HORZ_SPACE;
 		}
 
 		// Score, High Score
-		int highScoreLoc = (JGGlob.SCREEN_WIDTH - fontMetrics.stringWidth("High Score"))/2;	
+		int highScoreLoc = (JGGlob.SCREEN_WIDTH - fontMetrics.stringWidth("High Score"))/2;
 
 		dbContext.setColor(Color.white);
 		dbContext.drawString("Score", 5, fontHeight);
@@ -365,11 +364,13 @@ public class JGalaxian extends Panel implements KeyListener {
 		dbContext.drawString(Integer.toString(highScore), highScoreLoc, fontHeight*2);
 
 		switch (gameState) {
-			case JGGlob.JGSTATE_GAMEOVER:	
-				dbContext.drawImage(gameOverSign, (JGGlob.SCREEN_WIDTH - JGGlob.GAMEOVER_WIDTH)/2, (JGGlob.SCREEN_HEIGHT - JGGlob.GAMEOVER_HEIGHT)/2, this);
+			case JGGlob.JGSTATE_GAMEOVER:
+				//dbContext.drawImage(gameOverSign, (JGGlob.SCREEN_WIDTH - JGGlob.GAMEOVER_WIDTH)/2, (JGGlob.SCREEN_HEIGHT - JGGlob.GAMEOVER_HEIGHT)/2, this);
+				messageBox("GAME OVER", true);
 				break;
 			case JGGlob.JGSTATE_CHANGINGLEVEL2:
-				dbContext.drawImage(getReadySign, (JGGlob.SCREEN_WIDTH - JGGlob.GETREADY_WIDTH)/2, (JGGlob.SCREEN_HEIGHT - JGGlob.GETREADY_HEIGHT)/2, this);
+				//dbContext.drawImage(getReadySign, (JGGlob.SCREEN_WIDTH - JGGlob.GETREADY_WIDTH)/2, (JGGlob.SCREEN_HEIGHT - JGGlob.GETREADY_HEIGHT)/2, this);
+				messageBox("GET READY", false);
 				break;
 		}
 	}
@@ -407,7 +408,7 @@ public class JGalaxian extends Panel implements KeyListener {
 								// Update Sprite states
 								switch (getCollisionType(s1.type(), s2.type())) {
 									case JGGlob.COL_PMISSILE_EMISSILE: break;
-									case JGGlob.COL_EMISSILE_PLAYER: 
+									case JGGlob.COL_EMISSILE_PLAYER:
 										s1.setAlive(false);
 										s2.setAlive(false);
 										explosionPoints.add(new Point(s1.getx(), s1.gety()));
@@ -419,7 +420,7 @@ public class JGalaxian extends Panel implements KeyListener {
 										s2.setAlive(false);
 										explosionPoints.add(new Point(s2.getx(), s2.gety()));
 										explosionPoints.add(new Point(s1.getx(), s1.gety()));
-										
+
 										if (s1.type() == JGGlob.HEADBADGUY_TYPE || s2.type() == JGGlob.HEADBADGUY_TYPE) {
 											wavShotBigBadGuy.play();
 										}
@@ -452,11 +453,11 @@ public class JGalaxian extends Panel implements KeyListener {
 												wavShotBadGuy2.play();
 											}
 										}
-										
+
 										addToScore = getScoreFromCollision(s1.type(), s2.type());
 										break;
 								}
-							
+
 								// Update Score
 								score += addToScore;
 								if (addToScore == 300) {
@@ -495,7 +496,7 @@ public class JGalaxian extends Panel implements KeyListener {
 				s.died();
 			}
 		}
-	
+
 		// Switch sprite lists
 		currSpriteList = nextSpriteList;
 
@@ -525,7 +526,7 @@ public class JGalaxian extends Panel implements KeyListener {
 		for (Point p : score300) {
 			sprites.get(currSpriteList).add(new JGScore300Sprite((int)p.getX(), (int)p.getY(), 0, 0, sfScore300));
 		}
-			
+
 		// We may need to create another missile
 		if (JGGlob.loadAnotherMissile) {
 			sprites.get(currSpriteList).add(new JGPMissileSprite(JGGlob.playerx + JGGlob.PMISSILE_XOFFSET, JGGlob.PLAYER_Y,
@@ -543,10 +544,10 @@ public class JGalaxian extends Panel implements KeyListener {
 					}
 					else if (grid[col][row] instanceof JGBadGuySprite) {
 						JGBadGuySprite s = (JGBadGuySprite)grid[col][row];
-						
+
 						// Perhaps the enemy should fire
 						if (Math.random() < enemyFireFrequency && s.isInChaseMode()) {
-							sprites.get(currSpriteList).add(new JGEMissileSprite(grid[col][row].getx() + JGGlob.EMISSILE_XOFFSET, 
+							sprites.get(currSpriteList).add(new JGEMissileSprite(grid[col][row].getx() + JGGlob.EMISSILE_XOFFSET,
 							                                                       grid[col][row].gety() + JGGlob.EMISSILE_YOFFSET,
 			                                                                 JGGlob.EMISSILE_WIDTH, JGGlob.EMISSILE_HEIGHT, sfEMissile));
 							wavEnemyFired.play();
@@ -556,30 +557,30 @@ public class JGalaxian extends Panel implements KeyListener {
 						boolean dir = (col >= 5 ? JGGlob.BADGUY_ATTACK_RIGHT : JGGlob.BADGUY_ATTACK_LEFT);
 
 					  if (JGGlob.numBadGuys < 4 && JGGlob.playerAlive) {
-							doAttack = true;	
+							doAttack = true;
 						}
 						else {
 							// Check if this one can attack
 							if (canBadGuyAttack(dir, col, row) && (Math.random() < attackFrequency) && (numAttacking < maxEnemiesAttacking)) {
-								doAttack = true;	
+								doAttack = true;
 							}
 						}
 
 						if (doAttack) {
 							if (!s.isAttacking()) {
 								wavBadGuyAttacking.play();
-							
+
 								s.attack(dir);
-									
+
 								// If this sprite is a head bad guy, we need to find wing men
 								// for him by choosing any 2 out of 3 possible
 								if (s.type() == JGGlob.HEADBADGUY_TYPE) {
 									JGBadGuySprite wingMan1, wingMan2, wingMan3;
-								
+
 									wingMan1 = (JGBadGuySprite)grid[col+1][4];
 									wingMan2 = (JGBadGuySprite)grid[col][4];
 									wingMan3 = (JGBadGuySprite)grid[col-1][4];
-							
+
 									int numGoing = 0;
 
 									// Left side
@@ -588,7 +589,7 @@ public class JGalaxian extends Panel implements KeyListener {
 												numGoing++;
 												wingMan3.attack(dir, s);
 											}
-											
+
 											if (wingMan2 != null) {
 												numGoing++;
 												wingMan2.attack(dir, s);
@@ -599,14 +600,14 @@ public class JGalaxian extends Panel implements KeyListener {
 												wingMan1.attack(dir, s);
 											}
 									}
-									
+
 									// Right side
 									if (col == 6) {
 											if (wingMan1 != null) {
 												numGoing++;
 												wingMan1.attack(dir, s);
 											}
-											
+
 											if (wingMan2 != null) {
 												numGoing++;
 												wingMan2.attack(dir, s);
@@ -638,19 +639,19 @@ public class JGalaxian extends Panel implements KeyListener {
 	private int getCollisionType(int t1, int t2) {
 	 if (t1 == JGGlob.PMISSILE_TYPE && isBadGuy(t2) ||
 	 	   isBadGuy(t1) && t2 == JGGlob.PMISSILE_TYPE) {
-			return JGGlob.COL_PMISSILE_BADGUY;	
+			return JGGlob.COL_PMISSILE_BADGUY;
 		}
 	 else if (t1 == JGGlob.PLAYER_TYPE && isBadGuy(t2) ||
 	 	        isBadGuy(t1) && t2 == JGGlob.PLAYER_TYPE) {
-			return JGGlob.COL_PLAYER_BADGUY;	
+			return JGGlob.COL_PLAYER_BADGUY;
 		}
 	 else if (t1 == JGGlob.PLAYER_TYPE && t2 == JGGlob.EMISSILE_TYPE ||
 	 	        t1 == JGGlob.EMISSILE_TYPE && t2 == JGGlob.PLAYER_TYPE) {
-			return JGGlob.COL_EMISSILE_PLAYER;	
+			return JGGlob.COL_EMISSILE_PLAYER;
 		}
 	 else if (t1 == JGGlob.PMISSILE_TYPE && t2 == JGGlob.EMISSILE_TYPE ||
 	 	        t1 == JGGlob.EMISSILE_TYPE && t2 == JGGlob.PMISSILE_TYPE) {
-			return JGGlob.COL_PMISSILE_EMISSILE;	
+			return JGGlob.COL_PMISSILE_EMISSILE;
 		}
 
 		return 0;
@@ -680,7 +681,7 @@ public class JGalaxian extends Panel implements KeyListener {
 
 	// To determine what kind of Sprite we're dealing with
 	private boolean isBadGuy(int type) {
-		return (type == JGGlob.BADGUY1_TYPE || 
+		return (type == JGGlob.BADGUY1_TYPE ||
 		        type == JGGlob.BADGUY2_TYPE ||
 		        type == JGGlob.BADGUY3_TYPE ||
 		        type == JGGlob.HEADBADGUY_TYPE);
@@ -694,12 +695,12 @@ public class JGalaxian extends Panel implements KeyListener {
 
 		// Unless the head bad guys are gone, row 4 can't attack
 		if (JGGlob.numHeadBadGuys != 0 && row == 4) {
-			return false;	
+			return false;
 		}
 
 		// If the player is dead, we can't attack
 		if (!JGGlob.playerAlive) {
-			return false;	
+			return false;
 		}
 
 		int tmpCol = col + (leftOrRight == JGGlob.BADGUY_ATTACK_RIGHT ? 1 : -1);
@@ -754,13 +755,13 @@ public class JGalaxian extends Panel implements KeyListener {
 			ClassLoader cl = cls.getClassLoader();
 
 			BufferedImage bi = ImageIO.read(cl.getResource(path));
-			BufferedImage sbi = scaleImage(bi, BufferedImage.TYPE_4BYTE_ABGR, (int)(bi.getWidth()*JGGlob.SCALE), (int)(bi.getHeight()*JGGlob.SCALE), JGGlob.SCALE, JGGlob.SCALE);		
-	
+			BufferedImage sbi = scaleImage(bi, BufferedImage.TYPE_4BYTE_ABGR, (int)(bi.getWidth()*JGGlob.SCALE), (int)(bi.getHeight()*JGGlob.SCALE), JGGlob.SCALE, JGGlob.SCALE);
+
 			return sbi;
 		}
 		catch (Exception e) {
 			System.err.println("Can't load image " + path + ": " + e.getMessage());
-			System.exit(1);	
+			System.exit(1);
 		}
 
 		return null;
@@ -797,17 +798,11 @@ public class JGalaxian extends Panel implements KeyListener {
 		// Extra life
 		extraLife = loadImage(JGGlob.EXTRALIFE_IMAGE_BASE + JGGlob.IMAGE_EXT);
 
-		// Game over
-		gameOverSign = loadImage(JGGlob.GAMEOVER_IMAGE_BASE + JGGlob.IMAGE_EXT);
-
-		// Get Ready
-		getReadySign = loadImage(JGGlob.GETREADY_IMAGE_BASE + JGGlob.IMAGE_EXT);
-
 		// Level flags
 		levelFlags = new BufferedImage[2];
 		levelFlags[JGGlob.LEVELFLAG_NORMAL] = loadImage(JGGlob.LEVELFLAG_IMAGE_BASE + "0" + JGGlob.IMAGE_EXT);
 		levelFlags[JGGlob.LEVELFLAG_WORTH5] = loadImage(JGGlob.LEVELFLAG_IMAGE_BASE + "1" + JGGlob.IMAGE_EXT);
-			
+
 		// Sounds
 		wavPlayerFired = loadSound(JGGlob.SOUNDS_BASE + "/playerfired.wav");
 		wavShotBadGuy1 = loadSound(JGGlob.SOUNDS_BASE + "/shotbadguy1.wav");
@@ -828,7 +823,7 @@ public class JGalaxian extends Panel implements KeyListener {
 		Graphics tmpContext;
 		Image img;
 		int component;
-		int i;	
+		int i;
 
 		sfEx5 = new Image[10];
 		sfEx4 = new Image[10];
@@ -850,7 +845,7 @@ public class JGalaxian extends Panel implements KeyListener {
 				component = 0;
 			}
 		}
-		
+
 		component = 255;
 		for (i=0; i<10; i++) {
 			img = createImage((int)(4.0*JGGlob.SCALE), (int)(4.0*JGGlob.SCALE));
@@ -865,7 +860,7 @@ public class JGalaxian extends Panel implements KeyListener {
 				component = 0;
 			}
 		}
-		
+
 		component = 255;
 		for (i=0; i<10; i++) {
 			img = createImage((int)(3.0*JGGlob.SCALE), (int)(3.0*JGGlob.SCALE));
@@ -880,7 +875,7 @@ public class JGalaxian extends Panel implements KeyListener {
 				component = 0;
 			}
 		}
-		
+
 		component = 255;
 		for (i=0; i<10; i++) {
 			img = createImage((int)(2.0*JGGlob.SCALE), (int)(2.0*JGGlob.SCALE));
@@ -895,7 +890,7 @@ public class JGalaxian extends Panel implements KeyListener {
 				component = 0;
 			}
 		}
-		
+
 		component = 255;
 		for (i=0; i<10; i++) {
 			img = createImage((int)(1.0*JGGlob.SCALE), (int)(1.0*JGGlob.SCALE));
@@ -918,7 +913,7 @@ public class JGalaxian extends Panel implements KeyListener {
 		for (int i=0; i<n; i++) {
 			sf[i] = loadImage(base + i + JGGlob.IMAGE_EXT);
 		}
-		
+
 		return sf;
 	}
 
@@ -926,6 +921,45 @@ public class JGalaxian extends Panel implements KeyListener {
 	private void wipeDoubleBuffer() {
 		dbContext.setColor(Color.black);
 		dbContext.fillRect(0, 0, JGGlob.SCREEN_WIDTH, JGGlob.SCREEN_HEIGHT);
+	}
+
+	public void messageBox(String s, boolean instructions)
+	{
+		int l, t, r, b, w, h;
+
+		// Add instructions
+		if (instructions) {
+			s = s + "\n\nClick window, then:\n<space>: Start\n<q>: Quit\n<left arrow>: left\n<right arrow>: right\n<space>: fire";
+		}
+
+		// Figure out how wide
+		w = -1;
+		for (String line : s.split("\n")) {
+			if (fontMetrics.stringWidth(line) > w) {
+				w = fontMetrics.stringWidth(line);
+			}
+		}
+		// Figure out how high
+		h=fontHeight + JGGlob.FONT_LINE_SPACING;
+		for (String line : s.split("\n")) {
+			h	+= fontHeight + JGGlob.FONT_LINE_SPACING;
+		}
+
+		l = (JGGlob.SCREEN_WIDTH - w)/2 - fontMetrics.getMaxAdvance();
+		r = l + w + 2*fontMetrics.getMaxAdvance();
+		t = (JGGlob.SCREEN_HEIGHT - h)/2;
+		b = t + h;
+
+		dbContext.setColor( Color.black );
+		dbContext.fillRect( l, t, r-l, b-t );
+		dbContext.setColor( Color.white );
+		dbContext.drawRect( l, t, r-l-1, b-t-1 );
+		dbContext.setColor( Color.red );
+		int y = t + fontHeight + JGGlob.FONT_LINE_SPACING;
+		for (String line : s.split("\n")) {
+			dbContext.drawString(line, (JGGlob.SCREEN_WIDTH-fontMetrics.stringWidth(line))/2, y);
+			y	+= fontHeight + JGGlob.FONT_LINE_SPACING;
+		}
 	}
 
 	// Handle key events
@@ -938,11 +972,11 @@ public class JGalaxian extends Panel implements KeyListener {
 				case JGGlob.KEYLEFT1:
 				case JGGlob.KEYLEFT2:
 					JGGlob.direction=JGGlob.MOVELEFT;
-					break;	
+					break;
 				case JGGlob.KEYRIGHT1:
 				case JGGlob.KEYRIGHT2:
 					JGGlob.direction=JGGlob.MOVERIGHT;
-					break;	
+					break;
 				case JGGlob.KEYFIRE1:
 				case JGGlob.KEYFIRE2:
 					JGGlob.fire=true;
@@ -953,38 +987,38 @@ public class JGalaxian extends Panel implements KeyListener {
 						Thread.sleep(1000);
 					} catch(Exception ex) {}
 					System.exit(0);
-					break;	
+					break;
 			}
 		}
 	}
-	
+
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case JGGlob.KEYLEFT1:
 			case JGGlob.KEYLEFT2:
 				JGGlob.direction=JGGlob.NOMOVE;
-				break;	
+				break;
 			case JGGlob.KEYRIGHT1:
 			case JGGlob.KEYRIGHT2:
 				JGGlob.direction=JGGlob.NOMOVE;
-				break;	
+				break;
 			case JGGlob.KEYFIRE1:
 			case JGGlob.KEYFIRE2:
 				JGGlob.fire=false;
-				break;	
-			case JGGlob.KEYQUIT:  System.exit(0); break;	
+				break;
+			case JGGlob.KEYQUIT:  System.exit(0); break;
 		}
 	}
-	
+
 	public void keyTyped(KeyEvent e) {
 	}
-	
+
 	// Starts a new game
 	private void initNewGame() {
 		gameState = JGGlob.JGSTATE_PLAYING;
 
 		// Clear out all the sprites
-		currSpriteList = 0;	
+		currSpriteList = 0;
 		sprites.get(0).clear();
 		sprites.get(1).clear();
 
@@ -993,15 +1027,15 @@ public class JGalaxian extends Panel implements KeyListener {
 		// Add a player Sprite
 		sprites.get(currSpriteList).add(new JGPlayerSprite((JGGlob.SCREEN_WIDTH - JGGlob.PLAYER_WIDTH)/2, JGGlob.PLAYER_Y,
 		                                                     JGGlob.PLAYER_WIDTH, JGGlob.PLAYER_HEIGHT, sfPlayer));
-		// Add a missile	
+		// Add a missile
 		sprites.get(currSpriteList).add(new JGPMissileSprite((JGGlob.SCREEN_WIDTH - JGGlob.PMISSILE_WIDTH)/2 + JGGlob.PMISSILE_XOFFSET, JGGlob.PLAYER_Y,
 		                                                       JGGlob.PMISSILE_WIDTH, JGGlob.PMISSILE_HEIGHT, sfPMissile));
 
 		// Update the bulletin board variables
 		JGGlob.loadAnotherMissile = false;
-		JGGlob.numBadGuys = 0;	
-		JGGlob.numHeadBadGuys = 0;	
-		
+		JGGlob.numBadGuys = 0;
+		JGGlob.numHeadBadGuys = 0;
+
 		// Reset enemy downward and lateral speeds
 		maxEnemyDescentSpeed = JGGlob.INITIAL_ENEMY_DESCENT_SPEED;
 		maxEnemyLateralSpeed = JGGlob.INITIAL_ENEMY_LATERAL_SPEED;
@@ -1034,7 +1068,7 @@ public class JGalaxian extends Panel implements KeyListener {
 		// Reset difficulty
 		attackFrequency = JGGlob.INITIAL_ATTACK_FREQUENCY;
 		enemyFireFrequency = JGGlob.INITIAL_ENEMY_FIRE_FREQUENCY;
-	
+
 		// Play sounds
 		wavStartGame.play();
 	}
@@ -1043,11 +1077,11 @@ public class JGalaxian extends Panel implements KeyListener {
 		JGSprite s;
 		int y = JGGlob.BADGUY_VERT_START;
 		int x;
-		
+
 		for (int row=0; row<3; row++) {
 			x = (JGGlob.SCREEN_WIDTH - (JGGlob.BADGUY_HORZ_SPACE*10))/2;
 			for (int col=0; col<10; col++) {
-				s = new JGBadGuySprite(row, col, x, y, JGGlob.BADGUY1_WIDTH, JGGlob.BADGUY1_HEIGHT, sfBadGuy1, JGGlob.BADGUY1_TYPE, 
+				s = new JGBadGuySprite(row, col, x, y, JGGlob.BADGUY1_WIDTH, JGGlob.BADGUY1_HEIGHT, sfBadGuy1, JGGlob.BADGUY1_TYPE,
                                  maxEnemyDescentSpeed, maxEnemyLateralSpeed);
 				sprites.get(currSpriteList).add(s);
 				grid[col][row] = s;
@@ -1068,9 +1102,9 @@ public class JGalaxian extends Panel implements KeyListener {
 			x += JGGlob.BADGUY_HORZ_SPACE;
 			JGGlob.numBadGuys++;
      }
-		
+
 		y -= JGGlob.BADGUY_VERT_SPACE;
-		
+
 		grid[0][4] = null;
 		grid[1][4] = null;
 		grid[8][4] = null;
@@ -1084,7 +1118,7 @@ public class JGalaxian extends Panel implements KeyListener {
 			x += JGGlob.BADGUY_HORZ_SPACE;
 			JGGlob.numBadGuys++;
      }
-		
+
 		y -= JGGlob.BADGUY_VERT_SPACE;
 
 		grid[0][5] = null;
@@ -1102,7 +1136,7 @@ public class JGalaxian extends Panel implements KeyListener {
 		x += JGGlob.BADGUY_HORZ_SPACE*3;
 		JGGlob.numBadGuys++;
 		JGGlob.numHeadBadGuys++;
-		
+
 		x = (JGGlob.SCREEN_WIDTH - (JGGlob.BADGUY_HORZ_SPACE*10))/2 + (JGGlob.BADGUY_HORZ_SPACE*6);
 		s = new JGBadGuySprite(5, 6, x, y, JGGlob.HEADBADGUY_WIDTH, JGGlob.HEADBADGUY_HEIGHT, sfBadGuy4, JGGlob.HEADBADGUY_TYPE,
 		                         maxEnemyDescentSpeed, maxEnemyLateralSpeed);
@@ -1115,4 +1149,3 @@ public class JGalaxian extends Panel implements KeyListener {
 		dxGrid = 1;
 	}
 }
-
