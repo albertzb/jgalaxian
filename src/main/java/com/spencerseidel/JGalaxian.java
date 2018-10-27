@@ -7,6 +7,8 @@
 package com.spencerseidel;
 
 import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import java.lang.Math;
@@ -18,7 +20,7 @@ import java.net.URL;
 import java.awt.geom.AffineTransform;
 import com.spencerseidel.*;
 
-public class JGalaxian extends Panel implements KeyListener {
+public class JGalaxian extends JPanel implements KeyListener {
 
   // These will store all the sprite faces.
   private Image sfPlayer[];
@@ -91,7 +93,7 @@ public class JGalaxian extends Panel implements KeyListener {
   private int gameState;
 
   public static void main(String[] args) {
-    Frame f = new Frame();
+    JFrame f = new JFrame();
     f.addWindowListener(new java.awt.event.WindowAdapter() {
        public void windowClosing(java.awt.event.WindowEvent e) {
          System.exit(0);
@@ -99,11 +101,13 @@ public class JGalaxian extends Panel implements KeyListener {
      });
 
     JGalaxian jg = new JGalaxian();
-    f.add(jg);
+    jg.setPreferredSize(new Dimension(JGGlob.SCREEN_WIDTH, JGGlob.SCREEN_HEIGHT));
+    f.getContentPane().add(jg);
     f.pack();
     jg.init();
-    f.setSize(JGGlob.SCREEN_WIDTH, JGGlob.SCREEN_HEIGHT);
     f.setVisible(true);
+    // TBD: switch to use key bindings
+    jg.requestFocusInWindow();
   }
 
   public void init() {
@@ -114,6 +118,7 @@ public class JGalaxian extends Panel implements KeyListener {
     gameState = JGGlob.JGSTATE_GAMEOVER;
 
     // Make sure we're listening to key events
+    // TBD: switch to use key bindings
     addKeyListener(this);
 
     // Load up all the images and sounds we'll need
@@ -967,6 +972,7 @@ public class JGalaxian extends Panel implements KeyListener {
   }
 
   // Handle key events
+  // TBD: switch to use key bindings
   public void keyPressed(KeyEvent e) {
     if (gameState == JGGlob.JGSTATE_GAMEOVER && e.getKeyCode() == KeyEvent.VK_SPACE) {
       initNewGame();
@@ -1011,6 +1017,7 @@ public class JGalaxian extends Panel implements KeyListener {
     }
   }
 
+  // TBD: switch to use key bindings
   public void keyReleased(KeyEvent e) {
     switch (e.getKeyCode()) {
       case JGGlob.KEYLEFT1:
@@ -1029,6 +1036,7 @@ public class JGalaxian extends Panel implements KeyListener {
     }
   }
 
+  // TBD: switch to use key bindings
   public void keyTyped(KeyEvent e) {
   }
 
