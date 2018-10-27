@@ -51,21 +51,10 @@ mvn package
 ./jg
 ```
 
-# Scaling game screen
+## Scaling game screen
 
-If you're running JGalaxian on a HiDPI screen, you likely now have a headache from squinting at the tiny screen. Open up `JGGlob.java` in your favorite text editor and change:
-
-```
-public static final double                  SCALE=1.0;
-```
-
-to
+If you're running JGalaxian on a HiDPI screen, you likely now have a headache from squinting at the tiny screen. JGalaxian supports scaling. To start it using something other than the default scale (1.5), do this:
 
 ```
-public static final double                  SCALE=3.0;
+./jq 2.0
 ```
-
-or whatever size works for your setup.
-
-Recompile and run.
-

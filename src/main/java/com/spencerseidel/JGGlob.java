@@ -20,11 +20,12 @@ import java.awt.event.KeyEvent;
 public class JGGlob {
 
   // Screen and animation info
-  public static final double                  SCALE=1.5;
-  public static final int                     SCREEN_WIDTH = (int)(448*SCALE);
-  public static final int                     SCREEN_HEIGHT = (int)(512*SCALE);
-  public static final long                    FRAME_DELAY = 20;                    // Milliseconds
-  public static final int                     FONT_LINE_SPACING = (int)(2*SCALE);
+  public static final double                  DEFAULT_SCALE=1.5;
+  public static       double                  SCALE=1.0;
+  public static       int                     SCREEN_WIDTH = 448; // Scalable
+  public static       int                     SCREEN_HEIGHT = 512; // Scalable
+  public static final long                    FRAME_DELAY = 20; // Milliseconds
+  public static       int                     FONT_LINE_SPACING = 2; // Scalable
 
   // Keys
   public static final int                     KEYLEFT1 = KeyEvent.VK_LEFT;
@@ -47,73 +48,65 @@ public class JGGlob {
   // This is static information about each kind of Sprite
   public static final String                  PLAYER_IMAGE_BASE = "art/player";
   public static final int                     PLAYER_IMAGES_TO_LOAD = 1;
-  public static final int                     PLAYER_WIDTH = (int)(26.0*SCALE);
-  public static final int                     PLAYER_HEIGHT = (int)(40.0*SCALE);
-  public static final int                     PLAYER_Y = (int)(438.0*SCALE);
+  public static       int                     PLAYER_WIDTH = 26; // Scalable
+  public static       int                     PLAYER_HEIGHT = 40; // Scalable
+  public static       int                     PLAYER_Y = 438; // Scalable
   public static final int                     PLAYER_TYPE = -1;
 
   public static final String                  PMISSILE_IMAGE_BASE = "art/pmissile";
   public static final int                     PMISSILE_IMAGES_TO_LOAD = 1;
-  public static final int                     PMISSILE_WIDTH = (int)(4.0*SCALE);
-  public static final int                     PMISSILE_HEIGHT = (int)(8.0*SCALE);
-  public static final int                     PMISSILE_XOFFSET = (int)(11.0*SCALE);
+  public static       int                     PMISSILE_WIDTH = 4; // Scalable
+  public static       int                     PMISSILE_HEIGHT = 8; // Scalable
+  public static       int                     PMISSILE_XOFFSET = 11; // Scalable
   public static final int                     PMISSILE_TYPE = -2;
 
   public static final String                  BADGUY1_IMAGE_BASE = "art/bg1";
   public static final int                     BADGUY1_IMAGES_TO_LOAD = 20;
-  public static final int                     BADGUY1_WIDTH = (int)(28.0*SCALE);
-  public static final int                     BADGUY1_HEIGHT = (int)(28.0*SCALE);
+  public static       int                     BADGUY1_WIDTH = 28; // Scalable
+  public static       int                     BADGUY1_HEIGHT = 28; // Scalable
   public static final int                     BADGUY1_TYPE = 2;
 
   public static final String                  BADGUY2_IMAGE_BASE = "art/bg2";
   public static final int                     BADGUY2_IMAGES_TO_LOAD = 20;
-  public static final int                     BADGUY2_WIDTH = (int)(28.0*SCALE);
-  public static final int                     BADGUY2_HEIGHT = (int)(28.0*SCALE);
+  public static       int                     BADGUY2_WIDTH = 28; // Scalable
+  public static       int                     BADGUY2_HEIGHT = 28; // Scalable
   public static final int                     BADGUY2_TYPE = 3;
 
   public static final String                  BADGUY3_IMAGE_BASE = "art/bg3";
   public static final int                     BADGUY3_IMAGES_TO_LOAD = 20;
-  public static final int                     BADGUY3_WIDTH = (int)(28.0*SCALE);
-  public static final int                     BADGUY3_HEIGHT = (int)(28.0*SCALE);
+  public static       int                     BADGUY3_WIDTH = 28; // Scalable
+  public static       int                     BADGUY3_HEIGHT = 28; // Scalable
   public static final int                     BADGUY3_TYPE = 4;
 
   public static final String                  HEADBADGUY_IMAGE_BASE = "art/g";
   public static final int                     HEADBADGUY_IMAGES_TO_LOAD = 20;
-  public static final int                     HEADBADGUY_WIDTH = (int)(28.0*SCALE);
-  public static final int                     HEADBADGUY_HEIGHT = (int)(28.0*SCALE);
+  public static       int                     HEADBADGUY_WIDTH = 28; // Scalable
+  public static       int                     HEADBADGUY_HEIGHT = 28; // Scalable
   public static final int                     HEADBADGUY_TYPE = 5;
 
-  public static final int                     BADGUY_HORZ_SPACE = (int)(35.0*SCALE);
-  public static final int                     BADGUY_VERT_SPACE = (int)(24.0*SCALE);
-  public static final int                     BADGUY_VERT_START = (int)(191.0*SCALE);
+  public static       int                     BADGUY_HORZ_SPACE = 35; // Scalable
+  public static       int                     BADGUY_VERT_SPACE = 24; // Scalable
+  public static       int                     BADGUY_VERT_START = 191; // Scalable
   public static final boolean                 BADGUY_ATTACK_RIGHT = true;
   public static final boolean                 BADGUY_ATTACK_LEFT = false;
 
   public static final String                  EMISSILE_IMAGE_BASE = "art/emissile";
   public static final int                     EMISSILE_IMAGES_TO_LOAD = 1;
-  public static final int                     EMISSILE_WIDTH = (int)(4.0*SCALE);
-  public static final int                     EMISSILE_HEIGHT = (int)(8.0*SCALE);
-  public static final int                     EMISSILE_XOFFSET = (int)(14.0*SCALE);
-  public static final int                     EMISSILE_YOFFSET = (int)(24.0*SCALE);
+  public static       int                     EMISSILE_WIDTH = 4; // Scalable
+  public static       int                     EMISSILE_HEIGHT = 8; // Scalable
+  public static       int                     EMISSILE_XOFFSET = 14; // Scalable
+  public static       int                     EMISSILE_YOFFSET = 24; // Scalable
   public static final int                     EMISSILE_TYPE = 6;
 
   public static final String                  EXTRALIFE_IMAGE_BASE= "art/extralife0";
-  public static final int                     EXTRALIFE_HEIGHT=(int)(28.0*SCALE);
-  public static final int                     EXTRALIFE_STARTX=(int)(22.0*SCALE);
-  public static final int                     EXTRALIFE_HORZ_SPACE=(int)(28.0*SCALE);
-
-  public static final String                  GAMEOVER_IMAGE_BASE= "art/gameover";
-  public static final int                     GAMEOVER_WIDTH=(int)(200.0*SCALE);
-  public static final int                     GAMEOVER_HEIGHT=(int)(300.0*SCALE);
-
-  public static final String                  GETREADY_IMAGE_BASE= "art/getready";
-  public static final int                     GETREADY_WIDTH=(int)(200.0*SCALE);
-  public static final int                     GETREADY_HEIGHT=(int)(50.0*SCALE);
+  public static       int                     EXTRALIFE_HEIGHT=28; // Scalable
+  public static       int                     EXTRALIFE_STARTX=22; // Scalable
+  public static       int                     EXTRALIFE_HORZ_SPACE=28; // Scalable
 
   public static final String                  LEVELFLAG_IMAGE_BASE= "art/levelflag";
-  public static final int                     LEVELFLAG_HEIGHT=(int)(26.0*SCALE);
-  public static final int                     LEVELFLAG_STARTX=(int)(416.0*SCALE);
-  public static final int                     LEVELFLAG_HORZ_SPACE=(int)(18.0*SCALE);
+  public static       int                     LEVELFLAG_HEIGHT=26; // Scalable
+  public static       int                     LEVELFLAG_STARTX=416; // Scalable
+  public static       int                     LEVELFLAG_HORZ_SPACE=18; // Scalable
   public static final int                     LEVELFLAG_NORMAL=0;
   public static final int                     LEVELFLAG_WORTH5=1;
 
@@ -129,11 +122,11 @@ public class JGGlob {
   public static final double                 INITIAL_ENEMY_FIRE_FREQUENCY=0.01;
   public static final double                 LEVELINC_ENEMY_FIRE_FREQUENCY=0.01;
   // Initial enemy descent and lateral speeds
-  public static final int                     INITIAL_ENEMY_DESCENT_SPEED=(int)(2.0*SCALE);
-  public static final int                     INITIAL_ENEMY_LATERAL_SPEED=(int)(2.0*SCALE);
+  public static       int                     INITIAL_ENEMY_DESCENT_SPEED=2; // Scalable
+  public static       int                     INITIAL_ENEMY_LATERAL_SPEED=2; // Scalable
   // Maximums
-  public static final int                     MAX_ENEMY_DESCENT_SPEED=(int)(3.0*SCALE);
-  public static final int                     MAX_ENEMY_LATERAL_SPEED=(int)(6.0*SCALE);
+  public static       int                     MAX_ENEMY_DESCENT_SPEED=3; // Scalable
+  public static       int                     MAX_ENEMY_LATERAL_SPEED=6; // Scalable
 
   public static final int                     NUM_STARS=25;
 
