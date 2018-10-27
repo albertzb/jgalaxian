@@ -101,6 +101,12 @@ public class JGalaxian extends JPanel implements KeyListener {
      });
 
     JGalaxian jg = new JGalaxian();
+    double scale = JGGlob.DEFAULT_SCALE;
+    if (args.length > 0) {
+      scale = Double.parseDouble(args[0]);
+    }
+
+    jg.scaleScreenElements(scale);
     jg.setPreferredSize(new Dimension(JGGlob.SCREEN_WIDTH, JGGlob.SCREEN_HEIGHT));
     f.getContentPane().add(jg);
     f.pack();
@@ -1174,5 +1180,44 @@ public class JGalaxian extends JPanel implements KeyListener {
 
     JGGlob.gridLeftEdge = (JGGlob.SCREEN_WIDTH - (JGGlob.BADGUY_HORZ_SPACE*10))/2;
     dxGrid = 1;
+  }
+
+  // Yes, this is terrible and a hack. Needs to be reworked.
+  public void scaleScreenElements(double scale) {
+    JGGlob.SCALE = scale;
+    JGGlob.SCREEN_WIDTH = (int)(JGGlob.SCREEN_WIDTH*scale);
+    JGGlob.SCREEN_HEIGHT = (int)(JGGlob.SCREEN_HEIGHT*scale);
+    JGGlob.FONT_LINE_SPACING = (int)(JGGlob.FONT_LINE_SPACING*scale);
+    JGGlob.PLAYER_WIDTH = (int)(JGGlob.PLAYER_WIDTH*scale);
+    JGGlob.PLAYER_HEIGHT = (int)(JGGlob.PLAYER_HEIGHT*scale);
+    JGGlob.PLAYER_Y = (int)(JGGlob.PLAYER_Y*scale);
+    JGGlob.PMISSILE_WIDTH = (int)(JGGlob.PMISSILE_WIDTH*scale);
+    JGGlob.PMISSILE_HEIGHT = (int)(JGGlob.PMISSILE_HEIGHT*scale);
+    JGGlob.PMISSILE_XOFFSET = (int)(JGGlob.PMISSILE_XOFFSET*scale);
+    JGGlob.BADGUY1_WIDTH = (int)(JGGlob.BADGUY1_WIDTH*scale);
+    JGGlob.BADGUY1_HEIGHT = (int)(JGGlob.BADGUY1_HEIGHT*scale);
+    JGGlob.BADGUY2_WIDTH = (int)(JGGlob.BADGUY2_WIDTH*scale);
+    JGGlob.BADGUY2_HEIGHT = (int)(JGGlob.BADGUY2_HEIGHT*scale);
+    JGGlob.BADGUY3_WIDTH = (int)(JGGlob.BADGUY3_WIDTH*scale);
+    JGGlob.BADGUY3_HEIGHT = (int)(JGGlob.BADGUY3_HEIGHT*scale);
+    JGGlob.HEADBADGUY_WIDTH = (int)(JGGlob.HEADBADGUY_WIDTH*scale);
+    JGGlob.HEADBADGUY_HEIGHT = (int)(JGGlob.HEADBADGUY_HEIGHT*scale);
+    JGGlob.BADGUY_HORZ_SPACE = (int)(JGGlob.BADGUY_HORZ_SPACE*scale);
+    JGGlob.BADGUY_VERT_SPACE = (int)(JGGlob.BADGUY_VERT_SPACE*scale);
+    JGGlob.BADGUY_VERT_START = (int)(JGGlob.BADGUY_VERT_START*scale);
+    JGGlob.EMISSILE_WIDTH = (int)(JGGlob.EMISSILE_WIDTH*scale);
+    JGGlob.EMISSILE_HEIGHT = (int)(JGGlob.EMISSILE_HEIGHT*scale);
+    JGGlob.EMISSILE_XOFFSET = (int)(JGGlob.EMISSILE_XOFFSET*scale);
+    JGGlob.EMISSILE_YOFFSET = (int)(JGGlob.EMISSILE_YOFFSET*scale);
+    JGGlob.EXTRALIFE_HEIGHT=(int)(JGGlob.EXTRALIFE_HEIGHT*scale);
+    JGGlob.EXTRALIFE_STARTX=(int)(JGGlob.EXTRALIFE_STARTX*scale);
+    JGGlob.EXTRALIFE_HORZ_SPACE=(int)(JGGlob.EXTRALIFE_HORZ_SPACE*scale);
+    JGGlob.LEVELFLAG_HEIGHT=(int)(JGGlob.LEVELFLAG_HEIGHT*scale);
+    JGGlob.LEVELFLAG_STARTX=(int)(JGGlob.LEVELFLAG_STARTX*scale);
+    JGGlob.LEVELFLAG_HORZ_SPACE=(int)(JGGlob.LEVELFLAG_HORZ_SPACE*scale);
+    JGGlob.INITIAL_ENEMY_DESCENT_SPEED=(int)(JGGlob.INITIAL_ENEMY_DESCENT_SPEED*scale);
+    JGGlob.INITIAL_ENEMY_LATERAL_SPEED=(int)(JGGlob.INITIAL_ENEMY_LATERAL_SPEED*scale);
+    JGGlob.MAX_ENEMY_DESCENT_SPEED=(int)(JGGlob.MAX_ENEMY_DESCENT_SPEED*scale);
+    JGGlob.MAX_ENEMY_LATERAL_SPEED=(int)(JGGlob.MAX_ENEMY_LATERAL_SPEED*scale);
   }
 }
