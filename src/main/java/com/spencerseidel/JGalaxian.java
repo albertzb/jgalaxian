@@ -64,8 +64,6 @@ public class JGalaxian extends JPanel implements KeyListener {
   private Image db;
   // This keeps track of how to move the bad guy grid
   private int dxGrid;
-  // Our game-wide variables
-  public static JGGlob glob;
   // A game counter for delays
   private long gameCount;
   private long gameResume;
@@ -117,10 +115,6 @@ public class JGalaxian extends JPanel implements KeyListener {
   }
 
   public void init() {
-
-    // First things first
-    glob = new JGGlob();
-
     gameState = JGGlob.JGSTATE_GAMEOVER;
 
     // Make sure we're listening to key events
@@ -1183,41 +1177,42 @@ public class JGalaxian extends JPanel implements KeyListener {
   }
 
   // Yes, this is terrible and a hack. Needs to be reworked.
+  //
   public void scaleScreenElements(double scale) {
+    JGGlob.SCREEN_WIDTH = (int)((JGGlob.SCREEN_WIDTH/JGGlob.SCALE)*scale);
+    JGGlob.SCREEN_HEIGHT = (int)((JGGlob.SCREEN_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.FONT_LINE_SPACING = (int)((JGGlob.FONT_LINE_SPACING/JGGlob.SCALE)*scale);
+    JGGlob.PLAYER_WIDTH = (int)((JGGlob.PLAYER_WIDTH/JGGlob.SCALE)*scale);
+    JGGlob.PLAYER_HEIGHT = (int)((JGGlob.PLAYER_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.PLAYER_Y = (int)((JGGlob.PLAYER_Y/JGGlob.SCALE)*scale);
+    JGGlob.PMISSILE_WIDTH = (int)((JGGlob.PMISSILE_WIDTH/JGGlob.SCALE)*scale);
+    JGGlob.PMISSILE_HEIGHT = (int)((JGGlob.PMISSILE_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.PMISSILE_XOFFSET = (int)((JGGlob.PMISSILE_XOFFSET/JGGlob.SCALE)*scale);
+    JGGlob.BADGUY1_WIDTH = (int)((JGGlob.BADGUY1_WIDTH/JGGlob.SCALE)*scale);
+    JGGlob.BADGUY1_HEIGHT = (int)((JGGlob.BADGUY1_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.BADGUY2_WIDTH = (int)((JGGlob.BADGUY2_WIDTH/JGGlob.SCALE)*scale);
+    JGGlob.BADGUY2_HEIGHT = (int)((JGGlob.BADGUY2_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.BADGUY3_WIDTH = (int)((JGGlob.BADGUY3_WIDTH/JGGlob.SCALE)*scale);
+    JGGlob.BADGUY3_HEIGHT = (int)((JGGlob.BADGUY3_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.HEADBADGUY_WIDTH = (int)((JGGlob.HEADBADGUY_WIDTH/JGGlob.SCALE)*scale);
+    JGGlob.HEADBADGUY_HEIGHT = (int)((JGGlob.HEADBADGUY_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.BADGUY_HORZ_SPACE = (int)((JGGlob.BADGUY_HORZ_SPACE/JGGlob.SCALE)*scale);
+    JGGlob.BADGUY_VERT_SPACE = (int)((JGGlob.BADGUY_VERT_SPACE/JGGlob.SCALE)*scale);
+    JGGlob.BADGUY_VERT_START = (int)((JGGlob.BADGUY_VERT_START/JGGlob.SCALE)*scale);
+    JGGlob.EMISSILE_WIDTH = (int)((JGGlob.EMISSILE_WIDTH/JGGlob.SCALE)*scale);
+    JGGlob.EMISSILE_HEIGHT = (int)((JGGlob.EMISSILE_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.EMISSILE_XOFFSET = (int)((JGGlob.EMISSILE_XOFFSET/JGGlob.SCALE)*scale);
+    JGGlob.EMISSILE_YOFFSET = (int)((JGGlob.EMISSILE_YOFFSET/JGGlob.SCALE)*scale);
+    JGGlob.EXTRALIFE_HEIGHT=(int)((JGGlob.EXTRALIFE_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.EXTRALIFE_STARTX=(int)((JGGlob.EXTRALIFE_STARTX/JGGlob.SCALE)*scale);
+    JGGlob.EXTRALIFE_HORZ_SPACE=(int)((JGGlob.EXTRALIFE_HORZ_SPACE/JGGlob.SCALE)*scale);
+    JGGlob.LEVELFLAG_HEIGHT=(int)((JGGlob.LEVELFLAG_HEIGHT/JGGlob.SCALE)*scale);
+    JGGlob.LEVELFLAG_STARTX=(int)((JGGlob.LEVELFLAG_STARTX/JGGlob.SCALE)*scale);
+    JGGlob.LEVELFLAG_HORZ_SPACE=(int)((JGGlob.LEVELFLAG_HORZ_SPACE/JGGlob.SCALE)*scale);
+    JGGlob.INITIAL_ENEMY_DESCENT_SPEED=(int)((JGGlob.INITIAL_ENEMY_DESCENT_SPEED/JGGlob.SCALE)*scale);
+    JGGlob.INITIAL_ENEMY_LATERAL_SPEED=(int)((JGGlob.INITIAL_ENEMY_LATERAL_SPEED/JGGlob.SCALE)*scale);
+    JGGlob.MAX_ENEMY_DESCENT_SPEED=(int)((JGGlob.MAX_ENEMY_DESCENT_SPEED/JGGlob.SCALE)*scale);
+    JGGlob.MAX_ENEMY_LATERAL_SPEED=(int)((JGGlob.MAX_ENEMY_LATERAL_SPEED/JGGlob.SCALE)*scale);
     JGGlob.SCALE = scale;
-    JGGlob.SCREEN_WIDTH = (int)(JGGlob.SCREEN_WIDTH*scale);
-    JGGlob.SCREEN_HEIGHT = (int)(JGGlob.SCREEN_HEIGHT*scale);
-    JGGlob.FONT_LINE_SPACING = (int)(JGGlob.FONT_LINE_SPACING*scale);
-    JGGlob.PLAYER_WIDTH = (int)(JGGlob.PLAYER_WIDTH*scale);
-    JGGlob.PLAYER_HEIGHT = (int)(JGGlob.PLAYER_HEIGHT*scale);
-    JGGlob.PLAYER_Y = (int)(JGGlob.PLAYER_Y*scale);
-    JGGlob.PMISSILE_WIDTH = (int)(JGGlob.PMISSILE_WIDTH*scale);
-    JGGlob.PMISSILE_HEIGHT = (int)(JGGlob.PMISSILE_HEIGHT*scale);
-    JGGlob.PMISSILE_XOFFSET = (int)(JGGlob.PMISSILE_XOFFSET*scale);
-    JGGlob.BADGUY1_WIDTH = (int)(JGGlob.BADGUY1_WIDTH*scale);
-    JGGlob.BADGUY1_HEIGHT = (int)(JGGlob.BADGUY1_HEIGHT*scale);
-    JGGlob.BADGUY2_WIDTH = (int)(JGGlob.BADGUY2_WIDTH*scale);
-    JGGlob.BADGUY2_HEIGHT = (int)(JGGlob.BADGUY2_HEIGHT*scale);
-    JGGlob.BADGUY3_WIDTH = (int)(JGGlob.BADGUY3_WIDTH*scale);
-    JGGlob.BADGUY3_HEIGHT = (int)(JGGlob.BADGUY3_HEIGHT*scale);
-    JGGlob.HEADBADGUY_WIDTH = (int)(JGGlob.HEADBADGUY_WIDTH*scale);
-    JGGlob.HEADBADGUY_HEIGHT = (int)(JGGlob.HEADBADGUY_HEIGHT*scale);
-    JGGlob.BADGUY_HORZ_SPACE = (int)(JGGlob.BADGUY_HORZ_SPACE*scale);
-    JGGlob.BADGUY_VERT_SPACE = (int)(JGGlob.BADGUY_VERT_SPACE*scale);
-    JGGlob.BADGUY_VERT_START = (int)(JGGlob.BADGUY_VERT_START*scale);
-    JGGlob.EMISSILE_WIDTH = (int)(JGGlob.EMISSILE_WIDTH*scale);
-    JGGlob.EMISSILE_HEIGHT = (int)(JGGlob.EMISSILE_HEIGHT*scale);
-    JGGlob.EMISSILE_XOFFSET = (int)(JGGlob.EMISSILE_XOFFSET*scale);
-    JGGlob.EMISSILE_YOFFSET = (int)(JGGlob.EMISSILE_YOFFSET*scale);
-    JGGlob.EXTRALIFE_HEIGHT=(int)(JGGlob.EXTRALIFE_HEIGHT*scale);
-    JGGlob.EXTRALIFE_STARTX=(int)(JGGlob.EXTRALIFE_STARTX*scale);
-    JGGlob.EXTRALIFE_HORZ_SPACE=(int)(JGGlob.EXTRALIFE_HORZ_SPACE*scale);
-    JGGlob.LEVELFLAG_HEIGHT=(int)(JGGlob.LEVELFLAG_HEIGHT*scale);
-    JGGlob.LEVELFLAG_STARTX=(int)(JGGlob.LEVELFLAG_STARTX*scale);
-    JGGlob.LEVELFLAG_HORZ_SPACE=(int)(JGGlob.LEVELFLAG_HORZ_SPACE*scale);
-    JGGlob.INITIAL_ENEMY_DESCENT_SPEED=(int)(JGGlob.INITIAL_ENEMY_DESCENT_SPEED*scale);
-    JGGlob.INITIAL_ENEMY_LATERAL_SPEED=(int)(JGGlob.INITIAL_ENEMY_LATERAL_SPEED*scale);
-    JGGlob.MAX_ENEMY_DESCENT_SPEED=(int)(JGGlob.MAX_ENEMY_DESCENT_SPEED*scale);
-    JGGlob.MAX_ENEMY_LATERAL_SPEED=(int)(JGGlob.MAX_ENEMY_LATERAL_SPEED*scale);
   }
 }
