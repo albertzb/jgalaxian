@@ -20,8 +20,8 @@ import java.awt.event.KeyEvent;
 public class JGGlob {
 
   // Screen and animation info
-  public static final double                  DEFAULT_SCALE=1.5;
-  public static       double                  SCALE=1.0;
+  public static final double                  DEFAULT_SCALE=1.0;
+  public static       double                  SCALE=DEFAULT_SCALE;
   public static       int                     SCREEN_WIDTH = 448; // Scalable
   public static       int                     SCREEN_HEIGHT = 512; // Scalable
   public static final long                    FRAME_DELAY = 20; // Milliseconds
