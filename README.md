@@ -67,5 +67,5 @@ mvn package
 If you're running JGalaxian on a HiDPI screen, you likely now have a headache from squinting at the tiny screen. JGalaxian supports scaling. To start it using something other than the default scale (1.5), do this:
 
 ```
-./jq 2.0
+./jg 2.0
 ```
