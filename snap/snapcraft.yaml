@@ -23,7 +23,7 @@ parts:
       'usr/lib/*/pulseaudio/*': '/lib'
   wrapper:
     plugin: dump
-    source: snap/.
+    source: for_snap/.
     organize:
       run.sh: bin/run.sh
 
