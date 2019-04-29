@@ -18,4 +18,4 @@ if [[ "$1" != "" ]] ; then
   SCALE=$1
 fi
 
-java -jar $SNAP/jar/jgalaxian-1.0-SNAPSHOT.jar $SCALE
+java -Djava.util.prefs.userRoot="$SNAP_USER_DATA" -jar $SNAP/jar/jgalaxian-1.0-SNAPSHOT.jar $SCALE

@@ -159,6 +159,9 @@ public class JGGlob {
   public static int                           numHeadBadGuys;
   public static boolean                       playerFired;
 
+  // For storing high scores
+  public static final String                  HIGH_SCORE_PREF="hiscore";
+
   void JGGlob() {
   }
 }

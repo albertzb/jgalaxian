@@ -19,6 +19,7 @@ import javax.imageio.*;
 import java.net.URL;
 import java.awt.geom.AffineTransform;
 import com.spencerseidel.*;
+import java.util.prefs.Preferences;
 
 public class JGalaxian extends JPanel implements KeyListener {
 
@@ -89,6 +90,8 @@ public class JGalaxian extends JPanel implements KeyListener {
   private int fontHeight;
   // Game state
   private int gameState;
+  // For storing persistent state data like high score
+  private Preferences prefs;
 
   public static void main(String[] args) {
     JFrame f = new JFrame();
@@ -116,6 +119,9 @@ public class JGalaxian extends JPanel implements KeyListener {
 
   public void init() {
     gameState = JGGlob.JGSTATE_GAMEOVER;
+
+    // Set up prefrences
+    prefs = Preferences.userRoot().node(this.getClass().getName());
 
     // Make sure we're listening to key events
     // TBD: switch to use key bindings
@@ -145,8 +151,8 @@ public class JGalaxian extends JPanel implements KeyListener {
     // These will be our explosions
     createExImages();
 
-    // Zero out hiscore
-    highScore = 0;
+    // Get hiscore
+    highScore = prefs.getInt(JGGlob.HIGH_SCORE_PREF, 0);
 
     stars = new Point[JGGlob.NUM_STARS];
     for (int i=0; i<JGGlob.NUM_STARS; i++) {
@@ -214,6 +220,7 @@ public class JGalaxian extends JPanel implements KeyListener {
 
     if (score > highScore) {
       highScore = score;
+      prefs.putInt(JGGlob.HIGH_SCORE_PREF, highScore);
     }
 
     // Player may have died
