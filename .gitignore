@@ -1,4 +1,7 @@
-
+.classpath
+.settings
+.vscode
+.project
 parts
 prime
 stage
