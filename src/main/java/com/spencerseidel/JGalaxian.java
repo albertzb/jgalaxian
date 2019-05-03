@@ -158,6 +158,8 @@ public class JGalaxian extends JPanel implements KeyListener {
     for (int i=0; i<JGGlob.NUM_STARS; i++) {
       stars[i] = new Point((int)(Math.random()*JGGlob.SCREEN_WIDTH), (int)(Math.random()*JGGlob.SCREEN_HEIGHT));
     }
+
+    wavStartGame.play();
   }
 
   public void start() {
