@@ -13,14 +13,20 @@ JGalaxian is a Java-based Galaxian clone (you do remember Galaxian, right?). Alt
 
 Standard stuff, really, but if you're new to 2D game design, maybe you'll find something useful to copy to use in your own games.
 
-## Snap install and usage
+## Install and usage
 
-The easiest way to install and play it is to install it with `snap`: `sudo snap install jgalaxian`.
+From [deb package](https://github.com/jsseidel/jgalaxian/releases)
+
+Or by snap:
+
+`sudo snap install jgalaxian`.
 
 To adjust the scaling either:
 
 1. Run it from the command line `jgalaxian 3.0`, or
-2. `cp /var/lib/snapd/desktop/applications/jgalaxian_jgalaxian.desktop
+2. `cp /usr/share/applications/jgalaxian.desktop ~/.local/share/applications/.`
+   and adjust the scaling in the Exec command.
+3. Snap: `cp /var/lib/snapd/desktop/applications/jgalaxian_jgalaxian.desktop
    ~/.local/share/applications/.` and adjust the scaling in the Exec command.
 
 # Compiling JGalaxian
