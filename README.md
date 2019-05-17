@@ -15,7 +15,9 @@ Standard stuff, really, but if you're new to 2D game design, maybe you'll find s
 
 ## Install and usage
 
-From [deb package](https://github.com/jsseidel/jgalaxian/releases)
+With `apt`, first download the package [deb
+package](https://github.com/jsseidel/jgalaxian/releases), and then `sudo apt
+install ./jgalaxian_18.04_1.0.0_amd64.deb`.
 
 Or by snap:
 
