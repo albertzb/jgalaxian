@@ -1,0 +1,3 @@
+#!/bin/bash
+
+java -jar /usr/lib/jgalaxian-1.0-SNAPSHOT.jar $*

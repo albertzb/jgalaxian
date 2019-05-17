@@ -1,0 +1,16 @@
+Source: jgalaxian
+Section: text
+Priority: optional
+Maintainer: Joseph Spencer Seidel <jsseidel@fastmail.com>
+Build-Depends: debhelper (>= 10),
+               openjdk-8-jdk,
+               maven
+Standards-Version: 4.1.2
+Homepage: https://github.com/jsseidel/jgalaxian
+Vcs-Git: https://github.com/jsseidel/jgalaxian.git
+Vcs-Browser: https://github.com/jsseidel/jgalaxian
+
+Package: jgalaxian
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A Galaxian clone for linux with updated sound
