@@ -4,26 +4,29 @@ summary: A Java Galaxian clone
 description: |
   JGalaxian is a Java-based Galaxian clone.
 confinement: strict
+grade: stable
+base: core18
+
 apps:
   jgalaxian:
-    command: bin/run.sh
-    plugs: [x11,alsa,pulseaudio]
+    command: bash -c "${SNAP}/usr/lib/jvm/java-8-openjdk-${SNAP_ARCH}/bin/java -version ; ${SNAP}/usr/lib/jvm/java-8-openjdk-${SNAP_ARCH}/bin/java -Djava.util.prefs.userRoot=\"$SNAP_USER_DATA\" -jar $SNAP/jar/jgalaxian-1.0-SNAPSHOT.jar $*"
+    environment:
+      # pulseaudio
+      LD_LIBRARY_PATH: ${SNAP}/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+      # Needed for fontconfig
+      XDG_DATA_HOME: ${SNAP}/usr/share
+      FONTCONFIG_PATH: ${SNAP}/etc/fonts/config.d
+      FONTCONFIG_FILE: ${SNAP}/etc/fonts/fonts.conf
+    plugs: [x11,pulseaudio]
+
 parts:
   jgalaxian:
     plugin: maven
     source-type: local
     source: .
-    #override-build: |
-    #  export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
-    #  mvn package
-    #  cp target/*.jar $SNAPCRAFT_PART_INSTALL/.
     build-packages:
       - openjdk-8-jdk
-    organize:
-      'usr/lib/*/pulseaudio/*': '/lib'
-  wrapper:
-    plugin: dump
-    source: for_snap/.
-    organize:
-      run.sh: bin/run.sh
+    stage-packages:
+      - openjdk-8-jdk
+      - libpulse0
 
