@@ -1,0 +1,3 @@
+#!/bin/bash
+
+lxc file pull java-dev/home/jsseidel/jgalaxian/target/jgalaxian-1.0-SNAPSHOT.jar ./jgalaxian-1.0-SNAPSHOT.jar && java -jar jgalaxian-1.0-SNAPSHOT.jar $*
