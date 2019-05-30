@@ -1,3 +1,11 @@
 #!/bin/bash
 
+#
+# This is a helper script for working in a java dev environment inside an LXD
+# container. The idea is that you develop inside the container and run this for
+# testing on the host. Normal environments wouldn't need to do things like
+# this, but I need careful control of versions so other (paying) projects don't
+# conflict.
+#
+
 lxc file pull java-dev/home/jsseidel/jgalaxian/target/jgalaxian-1.0-SNAPSHOT.jar ./jgalaxian-1.0-SNAPSHOT.jar && java -jar jgalaxian-1.0-SNAPSHOT.jar $*
