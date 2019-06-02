@@ -452,7 +452,7 @@ public class JGalaxian extends JPanel implements KeyListener {
 
                     wavPlayerExplode.play();
 
-                    addToScore = getScoreFromCollision(s1.type(), s2.type());
+                    addToScore = getScoreFromCollision(s1, s2);
                   break;
 
                   case JGGlob.COL_PMISSILE_BADGUY:
@@ -471,7 +471,7 @@ public class JGalaxian extends JPanel implements KeyListener {
                       }
                     }
 
-                    addToScore = getScoreFromCollision(s1.type(), s2.type());
+                    addToScore = getScoreFromCollision(s1, s2);
                     break;
                 }
 
@@ -675,22 +675,27 @@ public class JGalaxian extends JPanel implements KeyListener {
   }
 
   // To determine score
-  private int getScoreFromCollision(int t1, int t2) {
-    int t;
+  private int getScoreFromCollision(JGSprite s1, JGSprite s2) {
+    JGSprite s;
 
-
-    if (isBadGuy(t1)) {
-      t = t1;
+    if (isBadGuy(s1.type())) {
+      s = s1;
     }
     else {
-      t = t2;
+      s = s2;
     }
 
-    switch (t) {
+    switch (s.type()) {
       case JGGlob.BADGUY1_TYPE: return 20;
       case JGGlob.BADGUY2_TYPE: return 30;
       case JGGlob.BADGUY3_TYPE: return 50;
-      case JGGlob.HEADBADGUY_TYPE: return 300;
+      case JGGlob.HEADBADGUY_TYPE:
+        JGBadGuySprite bgs = (JGBadGuySprite)s;
+        if (bgs.isAttackingOrChasing()) {
+          return 300;
+        }
+
+        return 75;
     }
 
     return 0;
