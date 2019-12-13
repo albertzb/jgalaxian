@@ -7,3 +7,6 @@ prime
 stage
 snap/.snapcraft
 debian/.debhelper
+/target/
+nbactions.xml
+nb-configuration.xml
